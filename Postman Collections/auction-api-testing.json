@@ -1,0 +1,832 @@
+{
+	"info": {
+		"_postman_id": "4f2d3a5f-b10a-4859-b20c-6c7d20ba1d50",
+		"name": "AuctionApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authorization",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1c1f8340-d92a-4aa6-85d5-e0f3108f9cc9",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.environment.set(\"username\", response.email);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "094496bf-c726-43fb-bb6f-2631161212a6",
+								"exec": [
+									"pm.environment.set(\"password\", \"passworD1*\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "26323957-090a-4302-95c8-a7d1c49ce5ef",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Lala\",\n  \"lastName\": \"Bala\",\n  \"email\": \"{{$randomEmail}}\",\n  \"role\": \"1\",\n  \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/v1/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5ff30603-a47b-4361-b887-413b46c80180",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.environment.set(\"token\", response.token);",
+									"pm.environment.set(\"userId\", response.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "ba621d46-1cad-453c-acca-2fed03d37104",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{username}}\",\n  \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/v1/auth/login"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "485516a9-2a4d-4fcd-a94b-963b076f56ba"
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "GetProducts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7ad4a91e-6d0e-4dc2-9c68-1c8cd5c737f4",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"for(var i=0; i<response.length; i++) {",
+									"    // console.log(response[i]);",
+									"    // console.log(response[i].name);",
+									"    if (response[i].name == \"Jacket\") {",
+									"        pm.environment.set(\"jacketStartPrice\", response[i].startPrice);",
+									"        pm.environment.set(\"jacketId\", response[i].id);",
+									"    }",
+									"        if (response[i].name == \"Running Shoes\") {",
+									"        pm.environment.set(\"runningShoesStartPrice\", response[i].startPrice);",
+									"        pm.environment.set(\"runningShoesId\", response[i].id);",
+									"    }",
+									"    if (response[i].name == \"Nike Air Force\") {",
+									"        pm.environment.set(\"nikeAirStartPrice\", response[i].startPrice);",
+									"        pm.environment.set(\"nikeAirId\", response[i].id);",
+									"    }",
+									"        if (response[i].name == \"Watch\") {",
+									"        pm.environment.set(\"watchStartPrice\", response[i].startPrice);",
+									"        pm.environment.set(\"watchId\", response[i].id);",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "b3278e56-709e-42ce-9f4e-851aa62240a3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/v1/products"
+					},
+					"response": []
+				},
+				{
+					"name": "GetRandomProduct",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8a867c65-fe85-476f-897a-4f3e00c84d1b",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.environment.set(\"idProductRandom\", jsonData.id);",
+									"",
+									"var name = jsonData.name;",
+									"console.log(name);",
+									"",
+									"pm.environment.set(\"startPriceRandom\", jsonData.startPrice)",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b1a01808-c5f0-4a7c-b99e-2fdde1af0d54",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "8b808d09-75ee-4c9c-bc46-7c391564e271",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/v1/products/random"
+					},
+					"response": []
+				},
+				{
+					"name": "PostProduct",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aaa48544-460e-45e2-a957-85886d8757f2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.environment.set(\"customProductStartPrice\", response.startPrice);",
+									"pm.environment.set(\"customProductid\", response.id);",
+									"pm.environment.set(\"customProductName\", response.name);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "6cd60472-64fa-4454-b51d-2f9431ca725e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Gloves\",\n  \"description\": \"string\",\n  \"imageURLs\": [\n    \"string\"\n  ],\n  \"startPrice\": 15,\n  \"expirationDateTime\": \"2023-12-15T12:37:57.451Z\",\n  \"userId\": \"{{userId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/v1/products"
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProduct",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "93a71e35-24a8-4938-aec7-e406e6bb19f1",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "eeb81a1e-ddd9-41e1-81f0-00ba36c7f14d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{url}}/api/v1/products/{{customProductid}}"
+					},
+					"response": []
+				},
+				{
+					"name": "CheckCustomProductIsDeleted",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "044f4e32-3731-47c2-bfb1-afb72ef1da2b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"pm.test(\"New product \" + pm.environment.get(\"customProductName\") + \" is deleted\", function () {",
+									"    pm.expect(pm.response.text()).to.not.include(pm.environment.get(\"customProductName\"));",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "3027a191-eb90-408a-95c9-1cb3f9f8ab98",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/v1/products"
+					},
+					"response": []
+				},
+				{
+					"name": "GetNewArrivalsProducts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c2bb7a25-a7ce-4f4d-993f-b152c2c26094",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "66c382ed-a3b9-419c-a617-cf69cc2b7bc0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/products/search?criteria=new-arrivals",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "criteria",
+									"value": "new-arrivals"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLastChanceProducts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "225b89dc-0056-4398-86d9-6c43a8e96604",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "94594632-5a86-4c1e-b7be-fe57bda3394d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/products/search?criteria=last-chance",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "criteria",
+									"value": "last-chance"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "89d2f18b-ecc9-4544-b04b-9762600e4fb3"
+		},
+		{
+			"name": "Bids",
+			"item": [
+				{
+					"name": "GetAllBids",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d831269-c6bd-4e2c-a478-541eac7d5115",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "caee2b57-08fe-42b1-b9c2-3847fff63f8b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/v1/bids"
+					},
+					"response": []
+				},
+				{
+					"name": "GetBidsForProduct",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "54c8710a-b05f-4618-9642-402ad15ee956",
+								"exec": [
+									"const response = pm.response.json();",
+									"",
+									"console.log(response);",
+									"",
+									"var watchBid;",
+									"if(response.length == 0) {",
+									"    watchBid = pm.environment.get(\"watchStartPrice\" + 1);",
+									"} else {",
+									"    watchBid = response + 1;",
+									"}",
+									"pm.environment.set(\"watchBid\", watchBid);",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "b0f7b303-9a38-49cc-9e21-7921305b7a3e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/v1/bids/product/{{watchId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "PostBid",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a1e33b1d-1b13-48dd-b71c-3eea7498cf95",
+								"exec": [
+									"var watchB =  pm.environment.get(\"watchStartPrice\") + 50;",
+									"pm.environment.set(\"watchFirstBid\", watchB);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "caadb64c-7bbd-4d13-b342-91ee4053841d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"pm.environment.set(\"watchBidId\", response.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "ec565bcc-b100-45bb-ae73-a98f84edeff9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"price\": {{watchFirstBid}},\n  \"productId\": \"{{watchId}}\",\n  \"userId\": \"{{userId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/v1/bids"
+					},
+					"response": []
+				},
+				{
+					"name": "GetNotificationsForProduct",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb23be97-2ff1-4c3b-8920-3f8e5fe51fa6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"var creationDateTime1;",
+									"",
+									"for(var i=0; i<response.length; i++) {",
+									"    console.log(response[i].creationDateTime);",
+									"    creationDateTime1 = response[i].creationDateTime;",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "461a2903-6661-4fe3-a4e2-378c4481eed7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/v1/notifications/"
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteBid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5cbb53fa-9a62-4908-b1b0-0a516fa2bc25",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "aa4da809-a043-44bf-bdd7-6530dc2072dd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{url}}/api/v1/bids/{{watchBidId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllBids Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3b0e72e9-b24a-4555-ae6a-176f1506f45c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "6aa5f357-6cdf-464f-bb83-56fb6d3243ca",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/v1/bids"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "3f4f6fad-383b-4457-817e-7b7bcd0a246f"
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "GetNotifications",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb23be97-2ff1-4c3b-8920-3f8e5fe51fa6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"var creationDateTime1;",
+									"",
+									"for(var i=0; i<response.length; i++) {",
+									"    console.log(response[i].creationDateTime);",
+									"    creationDateTime1 = response[i].creationDateTime;",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "876643c0-639f-4cbe-8d56-314f283d4a76",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/v1/notifications/"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "d08fa071-6c47-400d-bfcf-34563cea1d86"
+		},
+		{
+			"name": "LogOut",
+			"item": [
+				{
+					"name": "GetLogout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8a4719f5-5014-4bb1-a5ab-e8d66b5478c3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.environment.unset(\"token\");",
+									"pm.environment.unset(\"username\");",
+									"pm.environment.unset(\"password\");",
+									"pm.environment.unset(\"userId\");",
+									"pm.environment.unset(\"customProductid\");",
+									"pm.environment.unset(\"customProductName\");",
+									"pm.environment.unset(\"customProductStartPrice\");",
+									"pm.environment.unset(\"getHighestBid\");",
+									"pm.environment.unset(\"id\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "ca448b3b-4676-4e05-863d-25c14c9373b9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/v1/auth/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "PostBid Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e2e3748f-6321-4f38-b531-54aa4e97c138",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "2472f32f-ba03-433d-a6b1-0537f8493d1e",
+								"exec": [
+									"pm.test(\"Status code is 401, Unauthoriazed..user is logged out\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "ccc3eff1-1e67-49d0-aba7-7937ae7c8abd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"price\": {{watchFirstBid}},\n  \"productId\": \"{{watchId}}\",\n  \"userId\": \"{{userId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/v1/bids"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "8d66825a-90da-4261-83a6-708a003fba83"
+		}
+	]
+}
