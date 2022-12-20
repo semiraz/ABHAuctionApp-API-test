@@ -313,7 +313,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "044f4e32-3731-47c2-bfb1-afb72ef1da2b",
+								"id": "573e035b-e65d-4d37-af44-49e9f455fa24",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -323,7 +323,6 @@
 									"pm.test(\"New product \" + pm.environment.get(\"customProductName\") + \" is deleted\", function () {",
 									"    pm.expect(pm.response.text()).to.not.include(pm.environment.get(\"customProductName\"));",
 									"});",
-									"",
 									""
 								],
 								"type": "text/javascript"
