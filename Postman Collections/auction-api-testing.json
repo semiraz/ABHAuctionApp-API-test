@@ -14,9 +14,11 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1c1f8340-d92a-4aa6-85d5-e0f3108f9cc9",
+								"id": "e7d17f22-5162-4d98-80e9-c78b945ddcf7",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
+									"pm.collectionVariables.get(\"variable_key\");",
+									"pm.collectionVariables.get(\"variable_key\");",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
@@ -30,7 +32,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "094496bf-c726-43fb-bb6f-2631161212a6",
+								"id": "72abdd4c-fa83-48ed-a697-f756f6eb2b6d",
 								"exec": [
 									"pm.environment.set(\"password\", \"passworD1*\");"
 								],
