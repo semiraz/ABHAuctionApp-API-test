@@ -456,7 +456,19 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
-									"});"
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"console.log(response);",
+									"",
+									"var watchBid;",
+									" for(let i in response) {",
+									"    if(Object.keys(response).length === 0) {",
+									"        watchBid = pm.environment.get(\"watchStartPrice\") + 1;",
+									"    }",
+									" }",
+									"console.log(watchBid);",
+									"pm.environment.set(\"watchBid\", watchBid);"
 								],
 								"type": "text/javascript"
 							}
