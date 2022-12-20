@@ -738,19 +738,12 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "eb23be97-2ff1-4c3b-8920-3f8e5fe51fa6",
+								"id": "6c424107-9e52-4a9a-83be-b3043fba8438",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"const response = pm.response.json();",
-									"var creationDateTime1;",
-									"",
-									"for(var i=0; i<response.length; i++) {",
-									"    console.log(response[i].creationDateTime);",
-									"    creationDateTime1 = response[i].creationDateTime;",
-									"}",
 									""
 								],
 								"type": "text/javascript"
