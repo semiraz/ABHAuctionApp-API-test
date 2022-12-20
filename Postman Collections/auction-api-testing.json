@@ -540,10 +540,9 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "a1e33b1d-1b13-48dd-b71c-3eea7498cf95",
+								"id": "96079a1f-5065-4cc0-b027-b36726a80a3c",
 								"exec": [
-									"var watchB =  pm.environment.get(\"watchStartPrice\") + 50;",
-									"pm.environment.set(\"watchFirstBid\", watchB);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -551,7 +550,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "caadb64c-7bbd-4d13-b342-91ee4053841d",
+								"id": "f71c8d68-6237-4e61-a534-7a1d4aeaccc0",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -579,7 +578,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"price\": {{watchFirstBid}},\n  \"productId\": \"{{watchId}}\",\n  \"userId\": \"{{userId}}\"\n}",
+							"raw": "{\n  \"price\": {{watchBid}},\n  \"productId\": \"{{watchId}}\",\n  \"userId\": \"{{userId}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
