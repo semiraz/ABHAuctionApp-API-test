@@ -221,7 +221,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "aaa48544-460e-45e2-a957-85886d8757f2",
+								"id": "b4e7c69b-44ea-4077-80b1-bb2b8f30c0d6",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -231,7 +231,18 @@
 									"",
 									"pm.environment.set(\"customProductStartPrice\", response.startPrice);",
 									"pm.environment.set(\"customProductid\", response.id);",
-									"pm.environment.set(\"customProductName\", response.name);"
+									"pm.environment.set(\"customProductName\", response.name);",
+									"",
+									"pm.test(\"New product \" + pm.environment.get(\"customProductName\") + \" is created\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.environment.get(\"customProductName\"));",
+									"});",
+									"// pm.test(\"New product \" + pm.environment.get(\"customProductName\") + \" is created\", function () {",
+									"//     for(var i=0; i<response.length; i++) {",
+									"//         if (response[i].name == pm.environment.get(\"customProductName\")) {",
+									"//             pm.expect(response[i].name).to.eql(pm.environment.get(\"customProductName\"));",
+									"//         }",
+									"//  }",
+									"// });"
 								],
 								"type": "text/javascript"
 							}
