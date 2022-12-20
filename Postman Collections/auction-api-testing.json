@@ -688,11 +688,22 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "3b0e72e9-b24a-4555-ae6a-176f1506f45c",
+								"id": "abc6a589-9ca6-4a9d-afd5-ac95d6642b61",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
-									"});"
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"let lastBidId;",
+									"pm.test(\"Last bid is deleted\", function () {",
+									"    for(let i in response) {",
+									"        lastBidId = response[response.length - 1].id;",
+									"        console.log(lastBidId);",
+									"        pm.expect(lastBidId).to.not.eql(pm.environment.get(\"watchBidId\"));",
+									"    }",
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
