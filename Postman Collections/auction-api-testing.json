@@ -501,20 +501,18 @@
 								"exec": [
 									"const response = pm.response.json();",
 									"",
-									"console.log(response);",
-									"",
-									"var watchBid;",
-									"if(response.length == 0) {",
-									"    watchBid = pm.environment.get(\"watchStartPrice\" + 1);",
+									"if(pm.response.text().length === 0) {",
+									"    watchBid = pm.environment.get(\"watchStartPrice\") + 1;",
 									"} else {",
 									"    watchBid = response + 1;",
 									"}",
+									"console.log(watchBid);",
 									"pm.environment.set(\"watchBid\", watchBid);",
 									"",
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
-									""
+									"// pm.test(\"Body matches string\", function () {"
 								],
 								"type": "text/javascript"
 							}
