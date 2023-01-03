@@ -40,7 +40,7 @@
 							}
 						}
 					],
-					"id": "26323957-090a-4302-95c8-a7d1c49ce5ef",
+					"id": "7bbb88e1-9141-410e-b328-150e69592424",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -81,7 +81,7 @@
 							}
 						}
 					],
-					"id": "ba621d46-1cad-453c-acca-2fed03d37104",
+					"id": "f2bf9299-268d-4863-b5dd-d53ade69ee5c",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -100,9 +100,21 @@
 						"url": "{{url}}/api/v1/auth/login"
 					},
 					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "6ae470fd-c8fd-4816-b6d0-3d57073e3578",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			],
-			"id": "485516a9-2a4d-4fcd-a94b-963b076f56ba"
+			"id": "877a5576-fd8f-4bab-9f55-7183eb764ad1"
 		},
 		{
 			"name": "Products",
