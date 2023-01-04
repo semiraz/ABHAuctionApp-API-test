@@ -438,7 +438,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "GetCategory",
 					"id": "175486c1-c650-4c5f-a34b-4ce48e0eb04d",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
