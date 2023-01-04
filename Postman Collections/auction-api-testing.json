@@ -450,7 +450,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "PostCategory",
 					"id": "737ad05c-35f3-4624-b037-3e20cb9c04c3",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
