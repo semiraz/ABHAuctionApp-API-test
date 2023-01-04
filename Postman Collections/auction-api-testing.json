@@ -159,7 +159,20 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
-									"});"
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"pm.environment.set(\"categoryName\", response.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "1b98cec0-e988-4e13-8d23-bc5274729a10",
+								"exec": [
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -180,7 +193,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Accesories\",\n  \"parentCategoryId\": \"{{idCategoryWomen}}\"\n}",
+							"raw": "{\n  \"name\": \"{{$randomProductName}}\",\n  \"parentCategoryId\": \"{{idCategoryWomen}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -912,20 +925,29 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "8a4719f5-5014-4bb1-a5ab-e8d66b5478c3",
+								"id": "e837fa06-d093-47bc-84bd-3976765eecbe",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"pm.environment.unset(\"token\");",
-									"pm.environment.unset(\"username\");",
-									"pm.environment.unset(\"password\");",
 									"pm.environment.unset(\"userId\");",
 									"pm.environment.unset(\"customProductid\");",
 									"pm.environment.unset(\"customProductName\");",
 									"pm.environment.unset(\"customProductStartPrice\");",
 									"pm.environment.unset(\"getHighestBid\");",
-									"pm.environment.unset(\"id\");"
+									"pm.environment.unset(\"id\");",
+									"pm.environment.unset(\"password\");",
+									"pm.environment.unset(\"username\");",
+									"pm.environment.unset(\"idCategoryWomen\");",
+									"pm.environment.unset(\"categoryName\");",
+									"pm.environment.unset(\"nikeAirId\");",
+									"pm.environment.unset(\"nikeAirStartPrice\");",
+									"pm.environment.unset(\"watchStartPrice\");",
+									"pm.environment.unset(\"watchId\");",
+									"pm.environment.unset(\"jacketId\");",
+									"pm.environment.unset(\"jacketStartPrice\");",
+									"pm.environment.unset(\"watchBid\");"
 								],
 								"type": "text/javascript"
 							}
