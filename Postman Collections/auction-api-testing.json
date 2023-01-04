@@ -190,6 +190,18 @@
 						"url": "{{url}}/api/v1/categories"
 					},
 					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "a2a3bd6e-4241-4510-b52d-6997921d287a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			],
 			"id": "fa94d485-fd78-4b12-b29c-0ede00a989bc"
