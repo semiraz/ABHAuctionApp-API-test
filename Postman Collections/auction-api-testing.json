@@ -105,6 +105,11 @@
 			"id": "877a5576-fd8f-4bab-9f55-7183eb764ad1"
 		},
 		{
+			"name": "Category",
+			"item": [],
+			"id": "fa94d485-fd78-4b12-b29c-0ede00a989bc"
+		},
+		{
 			"name": "Products",
 			"item": [
 				{
@@ -439,13 +444,43 @@
 				},
 				{
 					"name": "GetCategory",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ddcc1f8d-672a-4473-9852-46cefc10402c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"for(var i=0; i<response.length; i++) {",
+									"    if (response[i].name == \"Woman\") {",
+									"        pm.environment.set(\"idCategoryWomen\", response[i].id);",
+									"    console.log(response[i].name);",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "175486c1-c650-4c5f-a34b-4ce48e0eb04d",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": "{{url}}/api/v1/categories"
 					},
 					"response": []
 				},
@@ -890,11 +925,6 @@
 				}
 			],
 			"id": "8d66825a-90da-4261-83a6-708a003fba83"
-		},
-		{
-			"name": "Category",
-			"item": [],
-			"id": "fa94d485-fd78-4b12-b29c-0ede00a989bc"
 		}
 	]
 }
