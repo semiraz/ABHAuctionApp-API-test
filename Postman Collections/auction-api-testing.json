@@ -106,7 +106,92 @@
 		},
 		{
 			"name": "Category",
-			"item": [],
+			"item": [
+				{
+					"name": "GetCategory",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ddcc1f8d-672a-4473-9852-46cefc10402c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"for(var i=0; i<response.length; i++) {",
+									"    if (response[i].name == \"Woman\") {",
+									"        pm.environment.set(\"idCategoryWomen\", response[i].id);",
+									"    console.log(response[i].name);",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "175486c1-c650-4c5f-a34b-4ce48e0eb04d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/v1/categories"
+					},
+					"response": []
+				},
+				{
+					"name": "PostCategory",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e02f1af5-200f-4fcf-b4f5-8890b22f2304",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "737ad05c-35f3-4624-b037-3e20cb9c04c3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Accesories\",\n  \"parentCategoryId\": \"{{idCategoryWomen}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/v1/categories"
+					},
+					"response": []
+				}
+			],
 			"id": "fa94d485-fd78-4b12-b29c-0ede00a989bc"
 		},
 		{
@@ -439,60 +524,6 @@
 								}
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetCategory",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "ddcc1f8d-672a-4473-9852-46cefc10402c",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"const response = pm.response.json();",
-									"for(var i=0; i<response.length; i++) {",
-									"    if (response[i].name == \"Woman\") {",
-									"        pm.environment.set(\"idCategoryWomen\", response[i].id);",
-									"    console.log(response[i].name);",
-									"    }",
-									"}",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "175486c1-c650-4c5f-a34b-4ce48e0eb04d",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
-						},
-						"method": "GET",
-						"header": [],
-						"url": "{{url}}/api/v1/categories"
-					},
-					"response": []
-				},
-				{
-					"name": "PostCategory",
-					"id": "737ad05c-35f3-4624-b037-3e20cb9c04c3",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": []
 					},
 					"response": []
 				}
