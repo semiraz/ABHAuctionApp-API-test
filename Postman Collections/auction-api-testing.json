@@ -192,7 +192,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "CheckIfCategoryIsCreated",
 					"id": "a2a3bd6e-4241-4510-b52d-6997921d287a",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
