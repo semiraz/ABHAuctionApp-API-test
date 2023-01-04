@@ -159,7 +159,20 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
-									"});"
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"pm.environment.set(\"categoryName\", response.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "1b98cec0-e988-4e13-8d23-bc5274729a10",
+								"exec": [
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -180,7 +193,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Accesories\",\n  \"parentCategoryId\": \"{{idCategoryWomen}}\"\n}",
+							"raw": "{\n  \"name\": \"{{$randomProductName}}\",\n  \"parentCategoryId\": \"{{idCategoryWomen}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -193,13 +206,47 @@
 				},
 				{
 					"name": "CheckIfCategoryIsCreated",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f19e3b0d-7af0-4550-9dc4-77b672ab4fdb",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"let lastCategory;",
+									"pm.test(\"Category \" + pm.environment.get(\"categoryName\") + \" is created\", function () {",
+									"    for(let i in response) {",
+									"        lastCategory = response[response.length - 1].name;",
+									"        pm.expect(lastCategory).to.be.eql(pm.environment.get(\"categoryName\"));",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "a2a3bd6e-4241-4510-b52d-6997921d287a",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "{{url}}/api/v1/categories"
 					},
 					"response": []
 				}
