@@ -638,6 +638,51 @@
 					"response": []
 				},
 				{
+					"name": "GetAllBids Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d831269-c6bd-4e2c-a478-541eac7d5115",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"console.log(response);",
+									"",
+									"var watchBid;",
+									" for(let i in response) {",
+									"    if(Object.keys(response).length === 0) {",
+									"        watchBid = pm.environment.get(\"watchStartPrice\") + 1;",
+									"    }",
+									" }",
+									"console.log(watchBid);",
+									"pm.environment.set(\"watchBid\", watchBid);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "6aa0a50d-9820-4a8e-a8d7-36c9bb0c3207",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/v1/user/{{userId}}/bids"
+					},
+					"response": []
+				},
+				{
 					"name": "GetBidsForProduct",
 					"event": [
 						{
@@ -792,50 +837,6 @@
 								}
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetAllBids Copy",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "abc6a589-9ca6-4a9d-afd5-ac95d6642b61",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"const response = pm.response.json();",
-									"let lastBidId;",
-									"pm.test(\"Last bid is deleted\", function () {",
-									"    for(let i in response) {",
-									"        lastBidId = response[response.length - 1].id;",
-									"        console.log(lastBidId);",
-									"        pm.expect(lastBidId).to.not.eql(pm.environment.get(\"watchBidId\"));",
-									"    }",
-									"});",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "6aa5f357-6cdf-464f-bb83-56fb6d3243ca",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
-						},
-						"method": "GET",
-						"header": [],
-						"url": "{{url}}/api/v1/bids"
 					},
 					"response": []
 				}
