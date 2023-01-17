@@ -633,25 +633,7 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{url}}/api/v1/user/{{userId}}/bids?",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"{{userId}}",
-								"bids"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": null
-								}
-							]
-						}
+						"url": "{{url}}/api/v1/user/{{userId}}/bids"
 					},
 					"response": []
 				},
