@@ -409,7 +409,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Gloves\",\n  \"description\": \"string\",\n  \"imageURLs\": [\n    \"string\"\n  ],\n  \"startPrice\": 15,\n  \"expirationDateTime\": \"2023-12-15T12:37:57.451Z\",\n  \"userId\": \"{{userId}}\"\n}",
+							"raw": "{\n  \"createProductRequest\": {\n    \"name\": \"string\",\n  \"name\": \"Gloves\",\n  \"description\": \"string\",\n  \"imageURLs\": [\n    \"string\"\n  ],\n    \"startPrice\": 15,\n    \"categoryId\": \"1448dc01-a0dc-431f-9b4a-7b0c463a7051\",\n    \"creationDateTime\": \"2023-01-17T14:18:06.448Z\",\n    \"expirationDateTime\": \"2023-01-18T14:18:06.448Z\",\n    \"userId\": \"{{userId}}\",\n    \"address\": {\n      \"street\": \"add\",\n      \"city\": \"string\",\n      \"zipCode\": \"1234556\",\n      \"state\": \"string\",\n      \"country\": \"string\"\n    }\n  },\n  \"createCreditCardRequest\": {\n    \"holderFullName\": \"Some Name\",\n    \"number\": \"1234567123488888\",\n    \"expirationDate\": \"2025-01-17T14:18:06.448Z\",\n    \"verificationValue\": \"123\"\n  }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
