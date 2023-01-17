@@ -932,7 +932,7 @@
 								"token": "{{token}}"
 							}
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"url": "{{url}}/api/v1/auth/logout"
 					},
