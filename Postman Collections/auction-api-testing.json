@@ -633,7 +633,7 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": "{{url}}/api/v1/bids"
+						"url": "{{url}}/api/v1/user/{{userId}}/bids"
 					},
 					"response": []
 				},
