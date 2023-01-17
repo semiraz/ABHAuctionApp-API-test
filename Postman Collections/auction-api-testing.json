@@ -742,14 +742,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"price\": {{watchBid}},\n  \"productId\": \"{{watchId}}\",\n  \"userId\": \"{{userId}}\"\n}",
+							"raw": "{\n  \"price\": 90,\n  \"productId\": \"{{watchId}}\",\n  \"userId\": \"{{userId}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{url}}/api/v1/bids"
+						"url": "{{url}}/api/v1/product/{{watchId}}/bids"
 					},
 					"response": []
 				},
