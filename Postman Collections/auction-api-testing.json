@@ -814,39 +814,6 @@
 					"response": []
 				},
 				{
-					"name": "DeleteBid",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "5cbb53fa-9a62-4908-b1b0-0a516fa2bc25",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "aa4da809-a043-44bf-bdd7-6530dc2072dd",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": "{{url}}/api/v1/bids/{{watchBidId}}"
-					},
-					"response": []
-				},
-				{
 					"name": "GetAllBids Copy",
 					"event": [
 						{
