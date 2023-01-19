@@ -100,6 +100,47 @@
 						"url": "{{url}}/api/v1/auth/login"
 					},
 					"response": []
+				},
+				{
+					"name": "RefreshToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5ff30603-a47b-4361-b887-413b46c80180",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.environment.set(\"token\", response.accessToken);",
+									"pm.environment.set(\"userId\", response.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "e2136a33-eaeb-4313-955b-d92ea8e27b51",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{username}}\",\n  \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/v1/auth/login"
+					},
+					"response": []
 				}
 			],
 			"id": "877a5576-fd8f-4bab-9f55-7183eb764ad1"
