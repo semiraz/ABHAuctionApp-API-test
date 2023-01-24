@@ -989,6 +989,18 @@
 						"url": "{{url}}/api/v1/bids"
 					},
 					"response": []
+				},
+				{
+					"name": "New Request",
+					"id": "1e359213-a4b4-47c6-9794-d9be81d3c6ac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			],
 			"id": "8d66825a-90da-4261-83a6-708a003fba83"
