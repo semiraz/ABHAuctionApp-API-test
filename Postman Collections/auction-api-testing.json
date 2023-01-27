@@ -585,6 +585,56 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get specific product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "225b89dc-0056-4398-86d9-6c43a8e96604",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "e7226d5d-6c20-4759-9342-2c299bad436b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/products/search?criteria=last-chance",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "criteria",
+									"value": "last-chance"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"id": "89d2f18b-ecc9-4544-b04b-9762600e4fb3"
@@ -993,6 +1043,30 @@
 				{
 					"name": "New Request",
 					"id": "1e359213-a4b4-47c6-9794-d9be81d3c6ac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request Copy",
+					"id": "28eed1b4-e725-498a-b235-35bc2ddfd61c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New Request Copy 2",
+					"id": "7e8ca788-43df-4436-84bf-819f8142bc01",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
